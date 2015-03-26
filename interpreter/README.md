@@ -23,13 +23,13 @@ This is the statement of Bayes' Theorem.
 
 There are a number of subjective elements here; that is on purpose. They are thrown out into the open so that we can manipulate and improve them.
 
-When doing Bayesian inference, we want to figure out the posterior from the data. However, we also need a prior, expecially when we do the first calculation. The prior we will use will be based on how stocks generally change. This calculation will give us a rough probability distribution as our first prior. The following priors will be posteriors from old calculations. A possible shape for such a prior would be a Gaussian disrtibution:
+When doing Bayesian inference, we want to figure out the posterior from the data. However, we also need a prior, expecially when we do the first calculation. The prior we will use will be based on how stocks generally change. This calculation will give us a rough probability distribution as our first prior. The following priors will be posteriors from old calculations. A possible shape for such a prior would be a Gaussian distribution:
 
 ![gaussian](http://www4f.wolframalpha.com/Calculate/MSP/MSP231421b81e97gh3i021h00002i967i7b86614edc?MSPStoreType=image/gif&s=23&w=311.&h=123.&cdf=RangeControl)
 
 We also need to calculate the marginal likelihood of the data. This marginal likelihood will also take the form of a distribution. We should choose a distribution for this that fits with our prior.
 
-In this sense, we are actually using [empirical Bayesian method](http://en.wikipedia.org/wiki/Empirical_Bayes_method).
+In this sense, we are actually using [empirical Bayesian methods](http://en.wikipedia.org/wiki/Empirical_Bayes_method).
 
 ### Diagram
 
