@@ -1,0 +1,30 @@
+digraph G{
+	rankdir=LR
+
+	subgraph cluster_interpreter {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		a1;
+		label = "Interpeter";
+	}
+
+	subgraph cluster_predictors {
+		node [style=filled];
+		Predictor1;
+		Predictor2;
+		Predictor3;
+		"...";
+		PredictorN;
+		label = "Predictors"
+		color = blue
+	}
+	
+	start->Predictor1;
+	start->Predictor2;
+	start->Predictor3;
+	start->PredictorN;
+	
+	start [shape=Mdiamond];
+	end [shape=Mquare];
+}
