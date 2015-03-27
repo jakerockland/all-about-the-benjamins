@@ -1,30 +1,34 @@
 digraph G{
-	rankdir=LR
-
 	subgraph cluster_interpreter {
 		style=filled;
 		color=lightgrey;
 		node [style=filled,color=white];
-		a1;
-		label = "Interpeter";
+		"Bayes Thm"->"Model Comparison"->"Check all Hypotheses";
+		"Check all Hypotheses"->"Expected Val of Tom. Stock" [label = "All done"];
+		"Check all Hypotheses" [shape=diamond];
+		"Check all Hypotheses"->"Bayes Thm" [label = "More remain"];
+		label = "Interpeter"
 	}
 
 	subgraph cluster_predictors {
 		node [style=filled];
-		Predictor1;
-		Predictor2;
-		Predictor3;
-		"...";
-		PredictorN;
-		label = "Predictors"
-		color = blue
+		Predictor;
+		color = blue;
 	}
 	
-	start->Predictor1;
-	start->Predictor2;
-	start->Predictor3;
-	start->PredictorN;
+	subgraph cluster_hypotheses {
+		node [style=filled];
+		Hypotheses;
+		color = green;
+	}
+	start->Predictor;
+
+	Predictor->"Bayes Thm" [label="D"];
 	
+	Hypotheses->"Bayes Thm" [label="H"];
+
+	"Expected Val of Tom. Stock"->end;
+
 	start [shape=Mdiamond];
-	end [shape=Mquare];
+	end [shape=Msquare];
 }
