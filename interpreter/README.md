@@ -37,6 +37,8 @@ In this sense, we are actually using [empirical Bayesian methods](http://en.wiki
 
 N.B. This diagram covers only the case of one predictor. The multi-predictor case is the same, but with all predictors data being integrated in the step "Bayes Thm" for *each* hypothesis tested.
 
-As this makes clear, we need to come up with a good set of hypotheses and smart ways of combining them. Ideally, "Expected Val of Tom. stock" will be a probability distribution across what tomorrow's stock price should be. Then, given that the probability for change in price x is p(x), then the total amount of stock as percentage of total assets we have is 
+As this makes clear, we need to come up with a good set of hypotheses and smart ways of combining them. Ideally, "Expected Val of Tom. stock" will be a probability distribution across what tomorrow's stock price should be. Then, given that the probability for percent change in price x is p(x), the expected increase in price (as a percent) is
 
 ![expected value integral](expected.png)
+
+From this, we want to calculate how much (potentially negative) should we invest into this stock, though this calculation will require knowledge of how much money we have, so will be left to the actual buying algorithm.
