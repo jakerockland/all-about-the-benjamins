@@ -2,7 +2,7 @@
 
 ## Basics
 
-This directory contains the Bayesian interpreter. The interpreter takes in data, runs it through a number of predictors, and then outputs a combined probability distribution using Bayes' Theorem.
+This directory contains the Bayesian interpreter. The interpreter takes in the conclusions of a number of predictors, and then outputs a combined probability distribution using Bayes' Theorem.
 
 The basic idea here is to take a bunch of "expert" predictions and combine them in order to come up with a prediction better than all the experts. Each expert produces a prediction, which we take, weigh based on track record, and then preform a Bayesian update based on this information.
 
