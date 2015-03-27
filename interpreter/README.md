@@ -14,7 +14,7 @@ Preforming a Bayesian update basically involves applying Bayes Theorem to our pr
 
 Bayesian inference is a method of inference which uses Bayes' Theorem to update the probability for a hypothesis.
 
-![bayes theorem](http://www.sciweavers.org/tex2img.php?eq=P%28H%7CD%29%20%3D%20%5Cfrac%7BP%28D%20%7C%20H%29%5C%2C%20P%28H%29%7D%7BP%28D%29%7D&bc=White&fc=Black&im=png&fs=12&ff=arev)
+![bayes theorem](bayes.png)
 
 This is the statement of Bayes' Theorem. 
 * P(H|D) is the probability of a hypothesis H given data D. This is what we want, it is called our *posterior*. In our case, the hypothesis might take the form of "Tomorrow the stock will rise by $5" with the data being the next predictor's conclusion.
