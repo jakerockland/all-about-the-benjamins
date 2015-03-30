@@ -54,4 +54,4 @@ def main():
     print("Hot:\t" + str(numpy.mean(hot_deltas)) + "\t" + str(numpy.var(hot_deltas)))
     print("Controversial:\t" + str(numpy.mean(controversial_deltas)) + "\t" + str(numpy.var(controversial_deltas)))
     print("Rising:\t" + str(numpy.mean(rising_deltas)) + "\t" + str(numpy.var(rising_deltas)))
-main()
+if __name__ == "__main__": main()
