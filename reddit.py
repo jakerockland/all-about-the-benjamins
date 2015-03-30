@@ -9,13 +9,14 @@ from __future__ import division
 from datetime import datetime, timedelta
 from pprint import pprint
 import math
+import numpy
 import praw
 
 def totimestamp(dt, epoch=datetime(1970,1,1)):
     td = dt - epoch
     return (td.microseconds + (td.seconds + td.days * 86400) * 10**6) / 10**6
 
-def postDeltas(type, num):
+def postDeltas(type="new", num=100):
     r = praw.Reddit('Post volatility calculator 1.0 by u/benjamin-spanklin.'
                     'A simple Python scraper to calculate post volatility.')
 
@@ -23,9 +24,7 @@ def postDeltas(type, num):
 
     all_subreddit = r.get_subreddit('all')
 
-    if (type == "new"):
-        posts = all_subreddit.get_new(limit=num)
-    elif (type == "hot"):
+    if (type == "hot"):
         posts = all_subreddit.get_hot(limit=num)
     elif (type == "controversial"):
         posts = all_subreddit.get_controversial(limit=num)
@@ -43,12 +42,16 @@ def postDeltas(type, num):
     deltas = []
 
     for post in posts:
-        timestamp = post.created_utc
-        pprint(timestamp)
+        deltas.append(abs(now - post.created_utc))
 
     return deltas
 
 def main():
-    new_deltas = postDeltas("new", 10) # change limit to +1000?
-
+    hot_deltas = numpy.array(postDeltas("hot", 100)) # change limit to +1000?
+    controversial_deltas = numpy.array(postDeltas("controversial", 100)) # change limit to +1000?
+    rising_deltas = numpy.array(postDeltas("rising", 100)) # change limit to +1000?
+    
+    print("Hot:\t" + numpy.mean(hot_deltas) + "\t" + numpy.var(hot_deltas))
+    print("Controversial:\t" + numpy.mean(controversial_deltas) + "\t" + numpy.var(controversial_deltas))
+    print("Rising:\t" + numpy.mean(rising_deltas) + "\t" + numpy.var(rising_deltas))
 main()
