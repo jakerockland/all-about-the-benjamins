@@ -22,7 +22,7 @@ class Interpreter (object):
 
 	def getPredictions(self):
 		predictions = []
-		predictors = getPredictors(self)
+		predictors = self.getPredictors()
 
 		for predictor in predictors:
 			pass	
