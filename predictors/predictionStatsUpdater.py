@@ -10,10 +10,16 @@ class PredictionStatsUpdater(object):
 			for line in f:
 				predictors.append(line.rstrip())
 
+	def getResults(self,predictor):
+		# TODO
+		return predictionStatsUpdate
+
 	def updatePredictionStats(self):
 		predictors = getPredictors(self)
-		
 
+		for predictor in predictors:
+			predictionStatsUpdate = getResults(predictor)
+			# TODO
 
 
 if __name__ == "__main__":
