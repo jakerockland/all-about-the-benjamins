@@ -8,7 +8,7 @@ class Updater:
 		with open('predictions','w') as f:
 			json.dump(predictions,f)
 
-	def getPredictions():
+	def getPredictions(self):
 		return predictions
 
 	def update(self):
