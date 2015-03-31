@@ -2,6 +2,6 @@
 
 from predictor import *
 
-class UpAll(Predictor):
+class AllDown(Predictor):
 	def decisionGoUp():
 		return False
