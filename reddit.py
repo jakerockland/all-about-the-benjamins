@@ -47,9 +47,9 @@ def postDeltas(sub="all", type="new", num=100):
     return deltas
 
 def main():
-    hot_deltas = numpy.array(postDeltas("all", "hot", 1000)) # change limit to +1000?
-    controversial_deltas = numpy.array(postDeltas("all", "controversial", 1000)) # change limit to +1000?
-    rising_deltas = numpy.array(postDeltas("all", "rising", 1000)) # change limit to +1000?
+    hot_deltas = numpy.array(postDeltas("all", "hot", 1000))
+    controversial_deltas = numpy.array(postDeltas("all", "controversial", 1000))
+    rising_deltas = numpy.array(postDeltas("all", "rising", 1000))
 
     print("Hot:\t" + str(numpy.mean(hot_deltas)) + "\t" + str(numpy.var(hot_deltas)))
     print("Controversial:\t" + str(numpy.mean(controversial_deltas)) + "\t" + str(numpy.var(controversial_deltas)))
