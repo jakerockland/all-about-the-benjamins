@@ -1,3 +1,7 @@
-class UpAll:
-	decisionGoUp():
-		return true
+# This predictor always predicts values will rise.
+
+from predictor import Predictor
+
+class AllUp(Predictor):
+	def decisionGoUp():
+		return True
