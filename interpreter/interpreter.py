@@ -13,4 +13,24 @@ class Interpreter (object):
 	# important, especially if at some future point we become 
 	# interested in calculating this sort of thing on an hourly
 	# or smaller instead of a daily basis.
-	pass
+	
+	def getPredictions():
+		# fake ones for now
+		return [True,True,False]
+	
+	def getConfidences():
+		# sooo fake
+		return [.5,.6,.7]
+
+	def makePrediction():
+		# TODO update on confidences
+		finalPrediction = .5
+		
+		predictions = getPredictions()
+		confidences = getConfidences()
+		
+		# TODO finish loop and bayes bit
+		
+		return finalPrediction
+
+if __name__ == "__main__": Interpreter.makePrediction()
