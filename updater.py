@@ -12,7 +12,7 @@ class Updater:
 		predictors = []
 		with open('predictors/list_of_predictors','r') as f:
 			for line in f:
-				predictors.append(line)
+				predictors.append(line.rstrip())
 		return predictors
 
 	def getPredictions(self):
