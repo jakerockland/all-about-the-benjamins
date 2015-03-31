@@ -41,14 +41,14 @@ class Interpreter (object):
 		predictions = self.getPredictions()
 		
 		for prediction in predictions:
-				prior = finalPrediction
-				pBA = prediction[1]
-				pBnA = prediction[2]
-				pnA = 1-finalPrediction
-				
-				pD = prior*pBA + pnA*pBnA
+			prior = finalPrediction
+			pBA = prediction[1]
+			pBnA = prediction[2]
+			pnA = 1-finalPrediction
+			
+			pD = prior*pBA + pnA*pBnA
 
-				finalPrediction = self.applyBayes(prior,pBA,pD)
+			finalPrediction = self.applyBayes(prior,pBA,pD)
 			print finalPrediction
 
 		return finalPrediction
