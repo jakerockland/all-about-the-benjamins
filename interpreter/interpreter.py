@@ -14,23 +14,37 @@ class Interpreter (object):
 	# interested in calculating this sort of thing on an hourly
 	# or smaller instead of a daily basis.
 	
-	def getPredictions():
-		# fake ones for now
-		return [True,True,False]
-	
-	def getConfidences():
-		# sooo fake
-		return [.5,.6,.7]
+	def Interpreter(self):
+		pass
 
-	def makePrediction():
+	def getPredictions(self):
+		# fake ones for now
+		# It goes (prediction, % predict yes when yes, % predict yes when no, 
+		# % no when yes, % no when no)
+		return [(1,.3,.3,.4,.6),(1,.5,.2,.3,.4),(0,.8,.2,.4,.3)]
+	
+	def applyBayes(self,prior,pDH,pD):
+		return pDH*prior/pD
+
+	def makePrediction(self):
 		# TODO update on confidences
 		finalPrediction = .5
 		
-		predictions = getPredictions()
-		confidences = getConfidences()
+		predictions = self.getPredictions()
 		
-		# TODO finish loop and bayes bit
-		
+		for prediction in predictions:
+			# TODO check this next line to see if proper bayes
+			if prediction[0] == 1:
+				pD = finalPrediction*prediction[1] + (1-finalPrediction)*prediction[2]
+				finalPrediction = self.applyBayes(finalPrediction, prediction[1],pD)
+			else:
+				pD = finalPrediction*prediction[3] + (1-finalPrediction)*prediction[4]
+				finalPrediction = self.applyBayes(finalPrediction, prediction[3],pD)
+			
+			print finalPrediction
+
 		return finalPrediction
 
-if __name__ == "__main__": Interpreter.makePrediction()
+if __name__ == "__main__": 
+	a = Interpreter()
+	print a.makePrediction()
