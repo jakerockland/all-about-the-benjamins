@@ -1,6 +1,6 @@
-# This predictor always predicts values will rise.
+# This predictor always predicts values will fall.
 
-from predictor import *
+from predictor import Predictor
 
 class AllDown(Predictor):
 	def decisionGoUp():
