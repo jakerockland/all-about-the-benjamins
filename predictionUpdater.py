@@ -1,7 +1,7 @@
 import json
-class Updater:
+class PredictionUpdater:
 	
-	def Updater(self):
+	def PredictionUpdater(self):
 		pass
 	
 	def dumpToDataBase(self,predictions):
@@ -29,10 +29,10 @@ class Updater:
 			predictions.append(prediction)
 		return predictions
 
-	def update(self):
+	def updatePredictions(self):
 		predictions = self.getPredictions()
 		self.dumpToDataBase(predictions)
 
 if __name__ == "__main__":
-	u = Updater()
-	u.update()
+	p = PredictionUpdater()
+	p.updatePredictions()
