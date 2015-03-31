@@ -29,7 +29,7 @@ class Interpreter (object):
 
 		# fake ones for now
 		# It goes (prediction, % predict yes when yes, % predict yes when no)
-		return [(1,.3,.3),(1,.5,.2),(0,.8,.2)]
+		return predictions
 	
 	def applyBayes(self,prior,pDH,pD):
 		return pDH*prior/pD
