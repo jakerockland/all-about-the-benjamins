@@ -1,0 +1,35 @@
+digraph G{
+	subgraph cluster_interpreter {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		"Bayes Thm"->"Model Comparison"->"Check all Hypotheses";
+		"Check all Hypotheses"->"Calc best fit" [label = "All done"];
+		"Check all Hypotheses" [shape=diamond];
+		"Check all Hypotheses"->"Bayes Thm" [label = "More remain"];
+		"Calc best fit"->"Expected Val of Tom. Stock";
+		label = "Interpeter"
+	}
+
+	subgraph cluster_predictors {
+		node [style=filled];
+		Predictor;
+		color = blue;
+	}
+	
+	subgraph cluster_hypotheses {
+		node [style=filled];
+		Hypotheses;
+		color = green;
+	}
+	start->Predictor;
+
+	Predictor->"Bayes Thm" [label="D"];
+	
+	Hypotheses->"Bayes Thm" [label="H"];
+
+	"Expected Val of Tom. Stock"->end;
+
+	start [shape=Mdiamond];
+	end [shape=Msquare];
+}
