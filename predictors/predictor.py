@@ -2,7 +2,7 @@ class Predictor (object):
 	# This class is the superclass for all predictors.
 	# It implements some basic functionality that all
 	# predictors should have (and, presumably, extend).
-	# 
+	#
 	# Predictors are instantiated and run by the
 	# interpreter, but a predictor that requires
 	# extra processing power, etc, could have an
@@ -18,4 +18,4 @@ class Predictor (object):
 	def decisionGoesUp():
 		# returns true for stock going up
 		# false for going down
-		return true
+		return True
