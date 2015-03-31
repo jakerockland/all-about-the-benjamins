@@ -13,6 +13,7 @@ class Updater:
 		with open('predictors/list_of_predictors','r') as f:
 			for line in f:
 				predictors.append(line.rstrip())
+		print predictors
 		return predictors
 
 	def getPredictions(self):
@@ -25,9 +26,9 @@ class Updater:
 				prediction = []
 				for line in f:
 					# line 0 is the prediction (0 or 1), line 1 is the prob y|y, line 2 is prob y|n
-					prediction.append(line)
+					prediction.append(line.rstrip())
 			predictions.append(prediction)
-
+		print predictions
 		return predictions
 
 	def update(self):
