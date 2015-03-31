@@ -4,7 +4,7 @@ class Updater:
 	def Updater(self):
 		pass
 	
-	def dumpToDataBase(predictions):
+	def dumpToDataBase(self,predictions):
 		with open('interpreter/predictions','w') as f:
 			json.dump(predictions,f)
 	
