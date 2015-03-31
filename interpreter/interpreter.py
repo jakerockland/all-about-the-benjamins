@@ -1,3 +1,4 @@
+import json
 class Interpreter (object):
 	# This class is the "Bayesian Interpreter". It takes in 
 	# predictions from Predictors and integrates them together
@@ -16,20 +17,10 @@ class Interpreter (object):
 	
 	def Interpreter(self):
 		pass
-	
-	def getPredictors(self):
-		return [] #TODO
 
 	def getPredictions(self):
-		predictions = []
-		predictors = self.getPredictors()
-
-		for predictor in predictors:
-			pass	
-
-		# fake ones for now
-		# It goes (prediction, % predict yes when yes, % predict yes when no)
-		return predictions
+		with open('confidences', 'r') as f:
+			return json.load(f)
 	
 	def applyBayes(self,prior,pDH,pD):
 		return pDH*prior/pD
