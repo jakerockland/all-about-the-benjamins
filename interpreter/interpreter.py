@@ -16,12 +16,20 @@ class Interpreter (object):
 	
 	def Interpreter(self):
 		pass
+	
+	def getPredictors(self):
+		return [] #TODO
 
 	def getPredictions(self):
+		predictions = []
+		predictors = getPredictors(self)
+
+		for predictor in predictors:
+			pass	
+
 		# fake ones for now
-		# It goes (prediction, % predict yes when yes, % predict yes when no, 
-		# % no when yes, % no when no)
-		return [(1,.3,.3,.4,.6),(1,.5,.2,.3,.4),(0,.8,.2,.4,.3)]
+		# It goes (prediction, % predict yes when yes, % predict yes when no)
+		return [(1,.3,.3),(1,.5,.2),(0,.8,.2)]
 	
 	def applyBayes(self,prior,pDH,pD):
 		return pDH*prior/pD
@@ -33,14 +41,14 @@ class Interpreter (object):
 		predictions = self.getPredictions()
 		
 		for prediction in predictions:
-			# TODO check this next line to see if proper bayes
-			if prediction[0] == 1:
-				pD = finalPrediction*prediction[1] + (1-finalPrediction)*prediction[2]
-				finalPrediction = self.applyBayes(finalPrediction, prediction[1],pD)
-			else:
-				pD = finalPrediction*prediction[3] + (1-finalPrediction)*prediction[4]
-				finalPrediction = self.applyBayes(finalPrediction, prediction[3],pD)
-			
+				prior = finalPrediction
+				pBA = prediction[1]
+				pBnA = prediction[2]
+				pnA = 1-finalPrediction
+				
+				pD = prior*pBA + pnA*pBnA
+
+				finalPrediction = self.applyBayes(prior,pBA,pD)
 			print finalPrediction
 
 		return finalPrediction
