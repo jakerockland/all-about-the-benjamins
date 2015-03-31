@@ -14,4 +14,8 @@ class Interpreter (object):
 	# interested in calculating this sort of thing on an hourly
 	# or smaller instead of a daily basis.
 
-	pass
+	def decision():
+		# returns true for up 
+		# false for down
+
+		return true 
