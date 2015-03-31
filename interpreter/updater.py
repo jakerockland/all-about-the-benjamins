@@ -18,5 +18,5 @@ class Updater:
 
 
 if __name__ == "__main__":
-	c = ConfidenceUpdater()
-	c.updateConfidences
+	u = Updater()
+	u.update()
