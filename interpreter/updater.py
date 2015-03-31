@@ -9,7 +9,6 @@ class Updater:
 			json.dump(predictions,f)
 
 	def getPredictions():
-		with 
 		return predictions
 
 	def update(self):
