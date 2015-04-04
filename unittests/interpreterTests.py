@@ -30,7 +30,7 @@ class InterpreterTests (unittest.TestCase):
 		self.failUnless(a.applyBayes(1,0.3,0.6)==0.5)
 		print "InterpreterTests:testBayes"
 
-	def testPredictions(self):
+	def testMakePrediction(self):
 		""" Test if predictions come out right """
 		a = Interpreter()
 		# name, prediction, y|y, y|n
@@ -40,6 +40,13 @@ class InterpreterTests (unittest.TestCase):
 		p = a.makePrediction(predictions,prior)
 		self.failUnless(abs(p - 0.5)<epsilon)
 		print "InterpreterTests:testPredictions"
+	
+	def testGetPredictions(self):
+		""" Test if getPredictions loads files in right; uses testfile in unittests """
+		a = Interpreter()
+		fileName = "testConfidences"
+		p = a.getPredictions(fileName)
+		self.failUnless(p == [[1,2,3,4],[2,3,4,5]])
 
 	def testRun(self):
 		""" Test if runs without errors """
