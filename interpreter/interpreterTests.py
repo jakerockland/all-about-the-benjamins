@@ -37,6 +37,10 @@ class InterpreterTests (unittest.TestCase):
 		p = a.makePrediction(predictions,prior)
 		self.failUnless(abs(p - 0.5)<epsilon)
 
+	def testRun(self):
+		a = Interpreter()
+		a.main()
+
 def main():
 	unittest.main()
 
