@@ -22,8 +22,8 @@ class Interpreter (object):
 		with open('confidences', 'r') as f:
 			return json.load(f)
 	
-	def applyBayes(self,prior,pDH,pD):
-		return pDH*prior/pD
+	def applyBayes(self,prior,pDH):
+		return pDH*prior
 
 	def makePrediction(self):
 		# TODO update on confidences
@@ -36,10 +36,8 @@ class Interpreter (object):
 			pBA = prediction[1]
 			pBnA = prediction[2]
 			pnA = 1-finalPrediction
-			
-			pD = prior*pBA + pnA*pBnA
 
-			finalPrediction = self.applyBayes(prior,pBA,pD)
+			finalPrediction = self.applyBayes(prior,pBA)
 			print finalPrediction
 
 		return finalPrediction
