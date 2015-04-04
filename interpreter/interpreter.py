@@ -18,11 +18,11 @@ class Interpreter (object):
 	def Interpreter(self):
 		pass
 
-	def getPredictions(self):
+	def getPredictions(self,fileName):
 		# The file confidences contains a list
 		# entries are of the form
 		# (name, prediction, y|y, y|n)
-		with open('confidences', 'r') as f:
+		with open(fileName, 'r') as f:
 			return json.load(f)
 
 	def applyBayes(self,prior,pDy,pDn):
@@ -60,7 +60,7 @@ class Interpreter (object):
 		return posterior
 	
 	def main(self):
-		predictions = self.getPredictions()
+		predictions = self.getPredictions('confidences')
 		return self.makePrediction(predictions,1)
 
 if __name__ == "__main__": 
