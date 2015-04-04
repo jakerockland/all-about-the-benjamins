@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import unittest
+from interpreter import Interpreter
 
 class InterpreterTests (unittest.TestCase):
 	# unittests for Interpreter
@@ -17,11 +18,35 @@ class InterpreterTests (unittest.TestCase):
 		## We'll use this once we actually have databases
 		print "InterpreterTests:tearDown_:end"
 
-	def testCheckBayes(self):
+	def testBayes(self):
+		""" Test if the Bayes method does what it should """
 		a = Interpreter()
+		# applyBayes(prior,pDy,pDn)
 		self.failUnless(a.applyBayes(0.5,0.5,0.5)==0.5)
+		self.failUnless(a.applyBayes(1,0,1)==0)
+		self.failUnless(a.applyBayes(0.5,.9,.1)==4.5)
+		self.failUnless(a.applyBayes(1,1,0)>100000)
 		self.failUnless(a.applyBayes(0,1,1)==0)
-		self.failUnless(a.applyBayes(.9,.1,0.5)==4.5)
+		self.failUnless(a.applyBayes(1,0.3,0.6)==0.5)
+		print "InterpreterTests:testBayes"
+
+	def testPredictions(self):
+		""" Test if predictions come out right """
+		a = Interpreter()
+		# name, prediction, y|y, y|n
+		predictions = [["testP1",1,0.3,0.6]]
+		prior = 1
+		epsilon = 10**(-15)
+		p = a.makePrediction(predictions,prior)
+		self.failUnless(abs(p - 0.5)<epsilon)
+		print "InterpreterTests:testPredictions"
+
+	def testRun(self):
+		""" Test if runs without errors """
+		a = Interpreter()
+		a.main()
+		print "InterpreterTests:testRun"
+
 
 def main():
 	unittest.main()
