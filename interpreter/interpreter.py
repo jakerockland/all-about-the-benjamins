@@ -31,6 +31,8 @@ class Interpreter (object):
 		# hypothesis "somethig else"
 		# Returns postY/postN  = pDy/pDn * priorY/priorN
 		# Note that priorY/priorN = prior
+		if pDn == 0:
+			return 100000000
 		return pDy/pDn * prior
 
 	def makePrediction(self,predictions, prior):
@@ -47,23 +49,15 @@ class Interpreter (object):
 		posterior = prior
 		
 		for prediction in predictions:
-			print prediction[0] + ": "+str(prediction[1])
-			
 			# assign sensible names to imported values
 			prior = posterior
-			prediction = prediction[1]
-			yy = prediction[2]
-			nn = prediction[3]
-
-			# convert to pDy and pDn
-			pDy = yy-prediction
-			pDn = nn-prediction
+			pDy = abs(prediction[1]-prediction[2]-1)
+			pDn = abs(prediction[1]-prediction[3]-1)
 
 			# Do the actual calculation
 			posterior = self.applyBayes(prior,pDy,pDn)
-			print finalPrediction
-
-		return finalPrediction
+		
+		return posterior
 	
 	def main(self):
 		predictions = self.getPredictions()
