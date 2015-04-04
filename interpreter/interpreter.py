@@ -19,29 +19,56 @@ class Interpreter (object):
 		pass
 
 	def getPredictions(self):
+		# The file confidences contains a list
+		# entries are of the form
+		# (name, prediction, y|y, y|n)
 		with open('confidences', 'r') as f:
 			return json.load(f)
-	
-	def applyBayes(self,prior,pDH):
-		return pDH*prior
 
-	def makePrediction(self):
-		# TODO update on confidences
-		finalPrediction = .5
-		
-		predictions = self.getPredictions()
+	def applyBayes(self,prior,pDy,pDn):
+		# Does a Bayesian model comparison
+		# between the hypothesis "goes up" and the
+		# hypothesis "somethig else"
+		# Returns postY/postN  = pDy/pDn * priorY/priorN
+		# Note that priorY/priorN = prior
+		return pDy/pDn * prior
+
+	def makePrediction(self,predictions, prior):
+		# Returns the confidence it has in the stock going
+		# up tomorrow.
+		#
+		# Applies Bayes' Thm to predictions and a
+		# non-informational prior in order to perform a model
+		# comparison. 
+		#
+		# Will return a rational value which represents the
+		# number of times more probable it is that the stock
+		# will go up.
+		posterior = prior
 		
 		for prediction in predictions:
-			prior = finalPrediction
-			pBA = prediction[1]
-			pBnA = prediction[2]
-			pnA = 1-finalPrediction
+			print prediction[0] + ": "+str(prediction[1])
+			
+			# assign sensible names to imported values
+			prior = posterior
+			prediction = prediction[1]
+			yy = prediction[2]
+			nn = prediction[3]
 
-			finalPrediction = self.applyBayes(prior,pBA)
+			# convert to pDy and pDn
+			pDy = yy-prediction
+			pDn = nn-prediction
+
+			# Do the actual calculation
+			posterior = self.applyBayes(prior,pDy,pDn)
 			print finalPrediction
 
 		return finalPrediction
+	
+	def main(self):
+		predictions = self.getPredictions()
+		return self.makePrediction(predictions,1)
 
 if __name__ == "__main__": 
 	a = Interpreter()
-	print a.makePrediction()
+	print a.main()
