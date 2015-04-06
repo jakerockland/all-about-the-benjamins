@@ -31,8 +31,14 @@ class Interpreter (object):
 		# hypothesis "somethig else"
 		# Returns postY/postN  = pDy/pDn * priorY/priorN
 		# Note that priorY/priorN = prior
+		
+		# If the values are the same, we have no info
+		# I am avoiding a 0/0 scenario.
+		if pDn == pDy:
+			return prior
 		if pDn == 0:
-			return 100000000
+			return 1000000000
+
 		return pDy/pDn * prior
 
 	def makePrediction(self,predictions, prior):
