@@ -3,5 +3,5 @@
 from predictor import Predictor
 
 class AllUp(Predictor):
-	def decisionGoUp():
+	def decisionGoUp(self):
 		return True
