@@ -1,4 +1,4 @@
-# This predictor predicts values will if it is forecast to be sunny in the next hour.
+# This predictor predicts values will if it is forecasted to be sunny in the next hour.
 
 from predictor import Predictor
 import pyowm
