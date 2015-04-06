@@ -12,5 +12,8 @@ class TornadoForecast(Predictor):
         self.country = country
 
     def decisionGoesUp(self):
-        forecast = owm.daily_forecast(city + "," + country)
-        return True if !forecast.will_have_tornado() else False
+        forecast = self.owm.daily_forecast(self.city + "," + self.country)
+        return True if not forecast.will_have_tornado() else False
+
+if __name__ == "__main__":
+    print(TornadoForecast().decisionGoesUp())
