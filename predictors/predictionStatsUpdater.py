@@ -1,8 +1,5 @@
 class PredictionStatsUpdater(object):
 
-	def PredictionStatsUpdater(self):
-		pass
-
 	def getPredictors(self):
 		predictors = []
 
@@ -10,12 +7,14 @@ class PredictionStatsUpdater(object):
 			for line in f:
 				predictors.append(line.rstrip())
 
+		return predictors
+
 	def getResults(self,predictor):
-		# TODO
+		predictionStatsUpdate = None # TODO
 		return predictionStatsUpdate
 
 	def updatePredictionStats(self):
-		predictors = getPredictors(self)
+		predictors = getPredictors()
 
 		for predictor in predictors:
 			predictionStatsUpdate = getResults(predictor)
@@ -23,5 +22,4 @@ class PredictionStatsUpdater(object):
 
 
 if __name__ == "__main__":
-	p = PredictionStatsUpdater()
-	p.updatePredictionStats()
+	PredictionStatsUpdater().updatePredictionStats()
