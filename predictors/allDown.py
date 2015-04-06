@@ -1,4 +1,4 @@
-# This predictor always predicts values will fall.
+# This predictor always predicts values will fall
 
 from predictor import Predictor
 

@@ -1,4 +1,4 @@
-# This predictor always predicts values will rise.
+# This predictor always predicts values will rise
 
 from predictor import Predictor
 
