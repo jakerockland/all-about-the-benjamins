@@ -15,7 +15,7 @@ class Predictor (object):
 	# run, though the subclassing functionality
 	# should be kept for quick prototyping.
 
-	def decisionGoesUp():
+	def decisionGoesUp(self):
 		# returns true for stock going up
 		# false for going down
 		return True

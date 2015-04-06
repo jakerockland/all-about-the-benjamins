@@ -3,5 +3,5 @@
 from predictor import Predictor
 
 class AllDown(Predictor):
-	def decisionGoUp():
+	def decisionGoUp(self):
 		return False
