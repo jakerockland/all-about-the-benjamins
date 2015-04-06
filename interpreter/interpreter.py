@@ -28,7 +28,7 @@ class Interpreter (object):
 		# hypothesis "somethig else"
 		# Returns postY/postN  = pDy/pDn * priorY/priorN
 		# Note that priorY/priorN = prior
-		
+
 		# If the values are the same, we have no info
 		# I am avoiding a 0/0 scenario.
 		if pDn == pDy:
@@ -67,5 +67,4 @@ class Interpreter (object):
 		return self.makePrediction(predictions,1)
 
 if __name__ == "__main__":
-	a = Interpreter()
-	print a.main()
+	print(Interpreter().main())
