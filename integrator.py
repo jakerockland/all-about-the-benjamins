@@ -8,10 +8,8 @@ class Integrator:
 
 	def getPredictors(self):
 		# Load a dict of predictor:prediction
-		predictors = {}
-		with open('data/predictors.json','r') as f:
-			predictors = json.load(f)
-		return predictors
+		with open('predictors.json','r') as f:
+			return json.load(f)
 
 	def getPerformance(self):
 		# Returns a list of actual performance of the stock,
@@ -21,7 +19,7 @@ class Integrator:
 		return {datetime.date(2015,1,1):0,datetime.date(2015,1,2):0}
 
 	def getPredictorData(self,predictor):
-			with open('data/'+predictor+'.json','r') as f:
+			with open('data/' + predictor + '.json','r') as f:
 				# Grab the date to up/down dictionary from the file
 				return json.load(f)
 
