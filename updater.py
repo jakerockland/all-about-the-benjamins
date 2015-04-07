@@ -1,4 +1,4 @@
-class PredictionStatsUpdater(object):
+class Updater(object):
 	def getPredictors(self):
 		predictors = []
 
@@ -20,4 +20,4 @@ class PredictionStatsUpdater(object):
 			# TODO
 
 if __name__ == "__main__":
-	PredictionStatsUpdater().updatePredictionStats()
+	Updater().updatePredictionStats()
