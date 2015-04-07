@@ -1,9 +1,10 @@
-"""
-A simple post volatility calculator for reddit
-
-Created by Jake Rockland
-
-"""
+################################################################################
+#
+# A simple post volatility calculator for reddit
+#
+# Created by Jake Rockland
+#
+################################################################################
 
 from __future__ import division
 from datetime import datetime, timedelta

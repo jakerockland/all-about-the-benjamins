@@ -1,4 +1,5 @@
 import json
+
 class Interpreter (object):
 	# This class is the "Bayesian Interpreter". It takes in
 	# predictions from Predictors and integrates them together
@@ -62,9 +63,9 @@ class Interpreter (object):
 
 		return posterior
 
-	def main(self):
+	def run(self):
 		predictions = self.getPredictions('confidences')
 		return self.makePrediction(predictions,1)
 
 if __name__ == "__main__":
-	print(Interpreter().main())
+	print(Interpreter().run())
