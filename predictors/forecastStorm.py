@@ -1,9 +1,9 @@
-# This predictor predicts values will decrease if it is forecast to tornado
+# This predictor predicts values will decrease if it is forecast to storm
 
 from predictor import Predictor
 import pyowm
 
-class TornadoForecast(Predictor):
+class ForecastStorm(Predictor):
     api_id = "be12f64238d2cb8b7c50b13e2faf7537"
     owm = pyowm.OWM(api_id)
 
@@ -13,7 +13,7 @@ class TornadoForecast(Predictor):
 
     def decisionGoesUp(self):
         forecast = self.owm.daily_forecast(self.city + "," + self.country)
-        return True if not forecast.will_have_tornado() else False
+        return True if not forecast.will_have_storm() else False
 
 if __name__ == "__main__":
-    print(TornadoForecast().decisionGoesUp())
+    print(ForecastStorm().decisionGoesUp())

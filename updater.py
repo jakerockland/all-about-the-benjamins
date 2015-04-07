@@ -1,12 +1,10 @@
-class PredictionStatsUpdater(object):
+import json
+import predictors
+
+class Updater(object):
 	def getPredictors(self):
-		predictors = []
-
-		with open('list_of_predictors','r') as f:
-			for line in f:
-				predictors.append(line.rstrip())
-
-		return predictors
+		with open('predictors.json','r') as f:
+			return json.load(f)
 
 	def getResults(self,predictor):
 		predictionStatsUpdate = None # TODO
@@ -20,4 +18,4 @@ class PredictionStatsUpdater(object):
 			# TODO
 
 if __name__ == "__main__":
-	PredictionStatsUpdater().updatePredictionStats()
+	print(Updater().getPredictors())

@@ -3,7 +3,7 @@
 from predictor import Predictor
 import pyowm
 
-class HurricaneForecast(Predictor):
+class ForecastHurricane(Predictor):
     api_id = "be12f64238d2cb8b7c50b13e2faf7537"
     owm = pyowm.OWM(api_id)
 
@@ -16,4 +16,4 @@ class HurricaneForecast(Predictor):
         return True if not forecast.will_have_hurricane() else False
 
 if __name__ == "__main__":
-    print(HurricaneForecast().decisionGoesUp())
+    print(ForecastHurricane().decisionGoesUp())
