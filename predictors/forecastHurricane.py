@@ -11,9 +11,9 @@ class ForecastHurricane(Predictor):
         self.city = city
         self.country = country
 
-    def decisionGoesUp(self):
+    def goesUp(self):
         forecast = self.owm.daily_forecast(self.city + "," + self.country)
         return True if not forecast.will_have_hurricane() else False
 
 if __name__ == "__main__":
-    print(ForecastHurricane().decisionGoesUp())
+    print(ForecastHurricane().goesUp())
