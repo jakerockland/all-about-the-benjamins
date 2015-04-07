@@ -1,28 +1,36 @@
-# from __future__ import division
-# from datetime import datetime, timedelta
-# import math
+import datetime
 import json
 import predictors
+import os.path
+
 
 class Updater(object):
     def __init__(self):
         with open('predictors.json','r') as f:
             self.predictors = json.load(f)
 
-    # def totimestamp(dt, epoch=datetime(1970,1,1)):
-	#     td = dt - epoch
-	#     return (td.microseconds + (td.seconds + td.days * 86400) * 10**6) / 10**6
-
     def updatePredictor(self,instance):
-        prediction = {}
-        # now = float(math.trunc(self.totimestamp(datetime.utcnow())))
-        prediction['recent'] = []
-        prediction['log'] = [None,0,0]
+        file = 'data/' + instance.getName() + '.json'
 
-        with open('data/' + instance.getName() + '.json','r') as f:
-            pass # TODO
-        with open('data/' + instance.getName() + '.json','w') as f:
-            json.dump(prediction,f)
+        # Creates data file for predictor if it does not yet exist
+        if not os.path.isfile(file):
+            now = datetime.datetime.strftime(datetime.datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
+            prediction = {}
+            prediction['recent'] = []
+            prediction['log'] = [now,0,0]
+            prediction['predictor'] = instance.getName()
+
+        # Otherwise, updates the data file for the respective predictor
+        else:
+            with open(file,'r') as f:
+                prediction = json.load(f)
+            rise = instance.goesUp()
+            now = datetime.datetime.strftime(datetime.datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
+            recent = prediction.get('recent').append([now,rise])
+
+        # Writes updated data back to file
+        with open(file,'w') as f:
+                json.dump(prediction,f)
 
     def updateAll(self):
         for predictor in self.predictors:

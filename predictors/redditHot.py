@@ -14,10 +14,10 @@ class RedditHot(Predictor):
     def getDeltas(self):
         return numpy.array(deltas(self.sub, "hot", 1000))
 
-    def decisionGoesUp(self):
+    def goesUp(self):
         deltas = self.getDeltas()
         coeff = math.sqrt(numpy.var(deltas)) / numpy.mean(deltas)
         return True if coeff < self.coeff_threshold else False
 
 if __name__ == "__main__":
-    print(RedditHot().decisionGoesUp())
+    print(RedditHot().goesUp())
