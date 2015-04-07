@@ -6,7 +6,7 @@ class Integrator:
 		with open('interpreter/predictions.json','w') as f:
 			json.dump(predictions,f)
 
-	def loadPredictors(self):
+	def getPredictors(self):
 		# Load a dict of predictor:prediction
 		predictors = {}
 		with open('data/predictors.json','r') as f:
@@ -27,7 +27,7 @@ class Integrator:
 
 	def getPredictions(self):
 		enhanced_predictions = []
-		predictors = loadPredictors()
+		predictors = getPredictors()
 		performance = getPerformance()
 		predictor_data = {}
 
