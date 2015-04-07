@@ -12,6 +12,9 @@ class SunnyToday(Predictor):
         self.country = country
 
     def decisionGoesUp(self):
-        forecast = owm.daily_forecast(city + "," + country)
+        forecast = self.owm.daily_forecast(self.city + "," + self.country)
         next_hour = pyowm.timeutils.next_hour()
         return True if forecast.will_be_sunny_at(next_hour) else False
+
+if __name__ == "__main__":
+    print(SunnyToday().decisionGoesUp())

@@ -1,5 +1,4 @@
 class PredictionStatsUpdater(object):
-
 	def getPredictors(self):
 		predictors = []
 
@@ -19,7 +18,6 @@ class PredictionStatsUpdater(object):
 		for predictor in predictors:
 			predictionStatsUpdate = getResults(predictor)
 			# TODO
-
 
 if __name__ == "__main__":
 	PredictionStatsUpdater().updatePredictionStats()

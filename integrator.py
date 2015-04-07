@@ -1,11 +1,11 @@
 import json
 import datetime
+
 class Integrator:
-	
 	def dumpToDataBase(self,predictions):
 		with open('interpreter/predictions.json','w') as f:
 			json.dump(predictions,f)
-	
+
 	def getPredictors(self):
 		# Load a dict of predictor:prediction
 		predictors = {}
@@ -19,16 +19,17 @@ class Integrator:
 		#TODO
 		# Dummy values given right now.
 		return {datetime.date(2015,1,1):0,datetime.date(2015,1,2):0}
-	
+
 	def getPredictorData(self,predictor):
 			with open('predictor_data/'+predictor+'.json','r') as f:
 				# Grab the date to up/down dictionary from the file
 				return json.load(f)
+
 	def getPredictions(self):
 		enhanced_predictions = []
 		predictors = self.getPredictors()
 		performance = self.getPerformance()
-		predictor_data = {} 
+		predictor_data = {}
 
 		for predictor in predictors:
 			predictor_data = self.getPredictorData()
@@ -63,5 +64,4 @@ class Integrator:
 		self.dumpToDataBase(predictions)
 
 if __name__ == "__main__":
-	p = Integrator()
-	p.integratePredictions()
+	Integrator().integratePredictions()

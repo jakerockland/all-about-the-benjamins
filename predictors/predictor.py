@@ -19,3 +19,6 @@ class Predictor (object):
 		# returns true for stock going up
 		# false for going down
 		return True
+
+	def getName(self):
+		return self.__class__.__name__
