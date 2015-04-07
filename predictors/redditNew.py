@@ -9,10 +9,14 @@ class RedditNew(Predictor):
     coeff_threshold = 0.1
 
     def __init__(self,sub="all"):
-        self.deltas = numpy.array(deltas(sub, "new", 1000))
+        self.sub = sub
+
+    def getDeltas(self):
+        return numpy.array(deltas(self.sub, "new", 1000))
 
     def decisionGoesUp(self):
-        coeff = math.sqrt(numpy.var(self.deltas)) / numpy.mean(self.deltas)
+        deltas = self.getDeltas()
+        coeff = math.sqrt(numpy.var(deltas)) / numpy.mean(deltas)
         return True if coeff < self.coeff_threshold else False
 
 if __name__ == "__main__":
