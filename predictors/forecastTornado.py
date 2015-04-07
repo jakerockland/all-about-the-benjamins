@@ -3,7 +3,7 @@
 from predictor import Predictor
 import pyowm
 
-class TornadoForecast(Predictor):
+class ForecastTornado(Predictor):
     api_id = "be12f64238d2cb8b7c50b13e2faf7537"
     owm = pyowm.OWM(api_id)
 
@@ -11,6 +11,9 @@ class TornadoForecast(Predictor):
         self.city = city
         self.country = country
 
-    def decisionGoesUp(self):
-        forecast = owm.daily_forecast(city + "," + country)
-        return True if !forecast.will_have_tornado() else False
+    def goesUp(self):
+        forecast = self.owm.daily_forecast(self.city + "," + self.country)
+        return True if not forecast.will_have_tornado() else False
+
+if __name__ == "__main__":
+    print(ForecastTornado().goesUp())

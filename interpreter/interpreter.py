@@ -1,4 +1,5 @@
 import json
+
 class Interpreter (object):
 	# This class is the "Bayesian Interpreter". It takes in
 	# predictions from Predictors and integrates them together
@@ -28,7 +29,7 @@ class Interpreter (object):
 		# hypothesis "somethig else"
 		# Returns postY/postN  = pDy/pDn * priorY/priorN
 		# Note that priorY/priorN = prior
-		
+
 		# If the values are the same, we have no info
 		# I am avoiding a 0/0 scenario.
 		if pDn == pDy:
@@ -62,10 +63,9 @@ class Interpreter (object):
 
 		return posterior
 
-	def main(self):
+	def run(self):
 		predictions = self.getPredictions('confidences')
 		return self.makePrediction(predictions,1)
 
 if __name__ == "__main__":
-	a = Interpreter()
-	print a.main()
+	print(Interpreter().run())

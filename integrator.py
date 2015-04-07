@@ -1,17 +1,15 @@
 import json
 import datetime
+
 class Integrator:
-	
-	def dumpToDataBase(self,predictions):
+	def dumpPredictions(self,predictions):
 		with open('interpreter/predictions.json','w') as f:
 			json.dump(predictions,f)
-	
+
 	def getPredictors(self):
 		# Load a dict of predictor:prediction
-		predictors = {}
-		with open('predictor_data/predictors.json','r') as f:
-			predictors = json.load(f)
-		return predictors
+		with open('predictors.json','r') as f:
+			return json.load(f)
 
 	def getPerformance(self):
 		# Returns a list of actual performance of the stock,
@@ -19,19 +17,20 @@ class Integrator:
 		#TODO
 		# Dummy values given right now.
 		return {datetime.date(2015,1,1):0,datetime.date(2015,1,2):0}
-	
+
 	def getPredictorData(self,predictor):
-			with open('predictor_data/'+predictor+'.json','r') as f:
+			with open('data/' + predictor + '.json','r') as f:
 				# Grab the date to up/down dictionary from the file
 				return json.load(f)
+
 	def getPredictions(self):
 		enhanced_predictions = []
-		predictors = self.getPredictors()
-		performance = self.getPerformance()
-		predictor_data = {} 
+		predictors = getPredictors()
+		performance = getPerformance()
+		predictor_data = {}
 
 		for predictor in predictors:
-			predictor_data = self.getPredictorData()
+			predictor_data = getPredictorData(predictor)
 			# Compare data with performance, calculate y|y, y|n
 			numyy = 0 # y|y
 			numxy = 0 # |y
@@ -60,8 +59,7 @@ class Integrator:
 
 	def integratePredictions(self):
 		predictions = self.getPredictions()
-		self.dumpToDataBase(predictions)
+		dumpPredictions(predictions)
 
 if __name__ == "__main__":
-	p = Integrator()
-	p.integratePredictions()
+	Integrator().integratePredictions()
