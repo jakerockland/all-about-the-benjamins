@@ -11,12 +11,14 @@ class Updater(object):
 
     def updatePredictor(self,instance):
         file = 'data/' + instance.getName() + '.json'
+        rise = instance.goesUp()
+        now = datetime.datetime.strftime(datetime.datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
 
         # Creates data file for predictor if it does not yet exist
         if not os.path.isfile(file):
-            now = datetime.datetime.strftime(datetime.datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
+            weight = 1 if rise else 0
             prediction = {}
-            prediction['recent'] = []
+            prediction['recent'] = [[now,rise]]
             prediction['log'] = [now,0,0]
             prediction['predictor'] = instance.getName()
 
@@ -24,9 +26,7 @@ class Updater(object):
         else:
             with open(file,'r') as f:
                 prediction = json.load(f)
-            rise = instance.goesUp()
-            now = datetime.datetime.strftime(datetime.datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
-            recent = prediction.get('recent').append([now,rise])
+            prediction.get('recent').append([now,rise])
 
         # Writes updated data back to file
         with open(file,'w') as f:
