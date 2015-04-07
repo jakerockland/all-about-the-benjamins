@@ -33,6 +33,8 @@ class Updater(object):
                 json.dump(prediction,f)
 
     def updateAll(self):
+        # Goes through each predictor and updates it's respective data file
+        # This needs to be continually kept up to date with predictors.json
         for predictor in self.predictors:
             if predictor == "ForecastHurricane":
                 instance = predictors.ForecastHurricane()
