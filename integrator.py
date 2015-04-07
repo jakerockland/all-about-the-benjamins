@@ -2,11 +2,11 @@ import json
 import datetime
 
 class Integrator:
-	def dumpToDataBase(self,predictions):
+	def dumpPredictors(self,predictions):
 		with open('interpreter/predictions.json','w') as f:
 			json.dump(predictions,f)
 
-	def getPredictors(self):
+	def loadPredictors(self):
 		# Load a dict of predictor:prediction
 		predictors = {}
 		with open('predictor_data/predictors.json','r') as f:
