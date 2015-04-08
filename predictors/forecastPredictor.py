@@ -11,4 +11,4 @@ class ForecastPredictor(Predictor):
         self.forecast = self.owm.daily_forecast('New York,US')
 
 if __name__ == "__main__":
-    print(ForecastPredictor().goesUp())
+    print(ForecastPredictor().goes_up())

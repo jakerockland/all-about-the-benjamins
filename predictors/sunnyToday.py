@@ -4,9 +4,9 @@ from forecastPredictor import ForecastPredictor
 import pyowm
 
 class SunnyToday(ForecastPredictor):
-    def goesUp(self):
+    def goes_up(self):
         next_hour = pyowm.timeutils.next_hour()
         return True if self.forecast.will_be_sunny_at(next_hour) else False
 
 if __name__ == "__main__":
-    print(SunnyToday().goesUp())
+    print(SunnyToday().goes_up())

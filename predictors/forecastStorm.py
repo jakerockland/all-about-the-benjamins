@@ -3,8 +3,8 @@
 from forecastPredictor import ForecastPredictor
 
 class ForecastStorm(ForecastPredictor):
-    def goesUp(self):
+    def goes_up(self):
         return True if not self.forecast.will_have_storm() else False
 
 if __name__ == "__main__":
-    print(ForecastStorm().goesUp())
+    print(ForecastStorm().goes_up())

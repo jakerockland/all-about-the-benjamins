@@ -11,13 +11,13 @@ class RedditPredictor(Predictor):
         self.type = "new"
         self.threshold = "0.1"
 
-    def getDeltas(self):
+    def get_deltas(self):
         return numpy.array(deltas(self.sub, self.type, 1000))
 
-    def goesUp(self):
-        deltas = self.getDeltas()
+    def goes_up(self):
+        deltas = self.get_deltas()
         coeff = math.sqrt(numpy.var(deltas)) / numpy.mean(deltas)
         return True if coeff < self.threshold else False
 
 if __name__ == "__main__":
-    print(RedditPredictor().goesUp())
+    print(RedditPredictor().goes_up())
