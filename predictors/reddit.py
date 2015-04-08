@@ -1,9 +1,10 @@
-"""
-A simple post volatility calculator for reddit
-
-Created by Jake Rockland
-
-"""
+################################################################################
+#
+# A simple post volatility calculator for reddit
+#
+# Created by Jake Rockland
+#
+################################################################################
 
 from __future__ import division
 from datetime import datetime, timedelta
@@ -30,8 +31,6 @@ def deltas(sub="all", type="new", num=100):
         posts = subreddit.get_rising(limit=num)
     elif (type == "top"):
         posts = subreddit.get_top(limit=num)
-    elif (type == "unmoderated"):
-        posts = subreddit.get_unmoderated(limit=num)
     else:
         posts = subreddit.get_new(limit=num)
 
