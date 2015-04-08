@@ -64,7 +64,7 @@ class Interpreter (object):
 		return posterior
 
 	def run(self):
-		predictions = self.getPredictions('confidences')
+		predictions = self.getPredictions('confidences.json')
 		return self.makePrediction(predictions,1)
 
 if __name__ == "__main__":
