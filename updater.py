@@ -8,8 +8,8 @@ class Updater(object):
         with open('predictors.json','r') as f:
             self.predictors = json.load(f)
 
-    def update_predictor(self,instance):
-        file = 'predictions/' + instance.getName() + '.json'
+    def update_predicton(self,instance):
+        file = 'predictions/' + instance.get_name() + '.json'
         rise = instance.goes_up()
         now = datetime.strftime(datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
 
@@ -52,7 +52,7 @@ class Updater(object):
             elif predictor == "SunnyTomorrow":
                 instance = predictors.SunnyTomorrow()
 
-            self.update_predictor(instance)
+            self.update_predicton(instance)
 
 if __name__ == "__main__":
     Updater().update_all()

@@ -4,82 +4,72 @@ import json
 
 class Integrator(object):
     def __init__(self):
+        self.today = datetime.strftime(datetime.utcnow(), '%Y-%m-%d')
         self.yesterday = datetime.strftime(datetime.utcnow()-timedelta(1), '%Y-%m-%d')
-		with open('predictors.json','r') as f:
+        with open('predictors.json','r') as f:
             self.predictors = json.load(f)
 
-	def aggregate_predictions(self,predictions,threshold=0.5):
-		yes_count = no_count = 0
-		for prediction in predictions:
-			if prediction[0].split()[0] == self.yesterday:
-				if prediction[1]:
-					yes_count += 1
-				else:
-					no_count += 1
-		return True if (yes_count / (yes_count + no_count)) > threshold else False
+    def aggregate_predictions(self,predictions,threshold=0.5):
+        yes_count = no_count = 0
+        for prediction in list(predictions):
+            if prediction[0].split()[0] == self.today:
+                if prediction[1]:
+                    yes_count += 1
+                else:
+                    no_count += 1
+                predictions.remove(prediction)
+        return True if (yes_count / (yes_count + no_count)) > threshold else False
 
-    def performance_up(self,symbol='^GSPC'):
+    def has_he_risen(self,symbol='^GSPC'):
         share = Share(symbol)
         data = share.get_historical(self.yesterday,self.yesterday)[0]
         delta = float(data.get('Close')) - float(data.get('Open'))
         return True if delta > 0 else False
 
-	def integrate_predictions:
-		file = 'interpreter/predictions.json'
-		with open(file,'r') as f:
+    def integrate_predictions(self,predictor,log):
+        file = 'predictions/' + predictor + '.json'
+        with open(file,'r') as f:
+            predictions = json.load(f)
+
+        todays_prediction = self.aggregate_predictions(predictions)
+        yesterday_rise = self.has_he_risen()
+
+        predictor_log = log.get(predictor)
+        if predictor_log is None:
+            log[predictor] = [todays_prediction, 0, 0, 0, 0]
+        else:
+            yesterdays_prediction = predictor_log[0]
+            prob_yy = predictor_log[1] # weight, predict_up|rise
+            num_y = predictor_log[2] # count, rise
+            prob_yn = predictor_log[3] # weight,predict_up|rise
+            num_n = predictor_log[4] # count, fall
+            if yesterday_rise:
+                if (num_y == 0):
+                    prob_yy = int(todays_prediction)
+                else:
+                    prob_yy = (num_y * prob_yy + int(todays_prediction)) / (num_y + 1)
+                num_y += 1
+            else:
+                if (num_n == 0):
+                    prob_yn = int(todays_prediction)
+                else:
+                    prob_yn = (num_n * prob_yn + int(todays_prediction)) / (num_n + 1)
+                num_n += 1
+            log[predictor] = [todays_prediction,prob_yy,num_y,prob_yn,num_n]
+
+        with open(file,'w') as f:
+            json.dump(predictions,f)
+
+    def integrate_all(self):
+        file = 'log.json'
+        with open(file,'r') as f:
             log = json.load(f)
 
-		for predictor in self.predictors:
-			with open('predictions/' + predictor + '.json','r') as f:
-                predictions = json.load(f)
-			prediction = aggregate_predictions(predictions)
-			performance = performance_up()
-
-			predictor_log = log.get(predictor)
-			if predictor_log != None:
-				pass # FIXME
-
+        for predictor in self.predictors:
+            self.integrate_predictions(predictor,log)
 
         with open(file,'w') as f:
             json.dump(log,f)
 
-	# def getPredictions(self):
-    #     enhanced_predictions = []
-    #     predictors = getPredictors()
-    #     performance = getPerformance()
-    #     predictor_data = {}
-    #
-    #     for predictor in predictors:
-    #         predictor_data = getPredictorData(predictor)
-    #         # Compare data with performance, calculate y|y, y|n
-    #         numyy = 0 # y|y
-    #         numxy = 0 # |y
-    #         numyn = 0 # y|n
-    #         numxn = 0 # |n
-    #         for day in performance:
-    #             # Check if key is in dict
-    #             if day in predictor_data:
-    #                 # check if conditioning on down or up
-    #                 if performance[day]==0:
-    #                     numxn+=1
-    #                     if predictor_data[day]==1:
-    #                         numyn+=1
-    #                 if performance[day]==1:
-    #                     numxy+=1
-    #                     if predictor_data[day]==1:
-    #                         numyy+=1
-    #         # Divide totals to get percentages
-    #         yy = numyy/(float(numxy))
-    #         yn = numyn/(float(numxn))
-    #
-    #         # dump prediction and related to 4-tuple in list
-    #         enhanced_predictions.append((predictor,predictors[predictor],yy,yn))
-    #
-    #     return enhanced_predictions
-	#
-    # def integratePredictions(self):
-    #     predictions = self.getPredictions()
-    #     dumpPredictions(predictions)
-
 if __name__ == "__main__":
-    Integrator().performace_up()
+    Integrator().integrate_all()
