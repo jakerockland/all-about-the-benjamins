@@ -36,7 +36,7 @@ class Integrator(object):
 
         predictor_log = log.get(predictor)
         if predictor_log is None:
-            log[predictor] = [todays_prediction, 0, 0, 0, 0]
+            log[predictor] = [int(todays_prediction), 0, 0, 0, 0]
         else:
             yesterdays_prediction = predictor_log[0]
             prob_yy = predictor_log[1] # weight, predict_up|rise
@@ -55,7 +55,7 @@ class Integrator(object):
                 else:
                     prob_yn = (num_n * prob_yn + int(todays_prediction)) / (num_n + 1)
                 num_n += 1
-            log[predictor] = [todays_prediction,prob_yy,num_y,prob_yn,num_n]
+            log[predictor] = [int(todays_prediction),prob_yy,num_y,prob_yn,num_n]
 
         with open(file,'w') as f:
             json.dump(predictions,f)
