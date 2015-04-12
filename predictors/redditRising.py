@@ -9,4 +9,4 @@ class RedditRising(RedditPredictor):
         self.threshold = "0.1"
 
 if __name__ == "__main__":
-    print(RedditRising().goesUp())
+    print(RedditRising().goes_up())

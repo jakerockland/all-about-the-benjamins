@@ -15,10 +15,10 @@ class Predictor (object):
 	# run, though the subclassing functionality
 	# should be kept for quick prototyping.
 
-	def goesUp(self):
+	def goes_up(self):
 		# returns true for stock going up
 		# false for going down
 		return True
 
-	def getName(self):
+	def get_name(self):
 		return self.__class__.__name__

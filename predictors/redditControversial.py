@@ -9,4 +9,4 @@ class RedditControversial(RedditPredictor):
         self.threshold = "0.1"
 
 if __name__ == "__main__":
-    print(RedditControversial().goesUp())
+    print(RedditControversial().goes_up())

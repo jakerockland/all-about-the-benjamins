@@ -9,4 +9,4 @@ class RedditHot(RedditPredictor):
         self.threshold = "0.1"
 
 if __name__ == "__main__":
-    print(RedditHot().goesUp())
+    print(RedditHot().goes_up())
