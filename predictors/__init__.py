@@ -8,4 +8,4 @@ from redditRising import RedditRising
 from redditTop import RedditTop
 from sunnyToday import SunnyToday
 from sunnyTomorrow import SunnyTomorrow
-from randomPredictor import randomPredictor
+from randomPredictor import RandomPredictor
