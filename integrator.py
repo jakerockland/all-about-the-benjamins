@@ -68,8 +68,7 @@ class Integrator(object):
         
 	success = 0
 	total = str(len(self.predictors))
-	self.predictors = 0
-	print "Integrating "+total+"predictors."
+	print "Integrating "+total+" predictors."
         for predictor in self.predictors:
 	    print "#" + str(self.predictors.index(predictor)+1) + " of " + total + ": Integrating " + predictor
 	    try: 
