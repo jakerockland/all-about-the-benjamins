@@ -1,6 +1,7 @@
 from yahoo_finance import Share
 from datetime import datetime, timedelta
 import json
+import traceback
 
 class Integrator(object):
     def __init__(self):
@@ -18,11 +19,7 @@ class Integrator(object):
                 else:
                     no_count += 1
                 predictions.remove(prediction)
-	try:
-		return (yes_count / (yes_count + no_count)) > threshold
-	except:
-		print "There is no data! Run updater first."
-		raise
+	return (yes_count / (yes_count + no_count)) > threshold
 
     def has_he_risen(self,symbol='^GSPC'):
         share = Share(symbol)
@@ -68,9 +65,21 @@ class Integrator(object):
         file = 'log.json'
         with open(file,'r') as f:
             log = json.load(f)
-
+        
+	success = 0
+	total = str(len(self.predictors))
+	self.predictors = 0
+	print "Integrating "+total+"predictors."
         for predictor in self.predictors:
-            self.integrate_predictions(predictor,log)
+	    print "#" + str(self.predictors.index(predictor)+1) + " of " + total + ": Integrating " + predictor
+	    try: 
+		self.integrate_predictions(predictor,log)
+		success+=1
+	    except:
+		print "There is no data for "+ predictor +"! Run updater first. Here's the traceback:"
+		print traceback.format_exc()
+
+	print "Integrated "+str(success)+" out of "+total+ " predictors."
 
         with open(file,'w') as f:
             json.dump(log,f)
