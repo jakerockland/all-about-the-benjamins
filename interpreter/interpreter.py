@@ -16,14 +16,14 @@ class Interpreter (object):
     # interested in calculating this sort of thing on an hourly
     # or smaller instead of a daily basis.
 
-    def get_predictions(self,fileName):
+    def getPredictions(self,fileName):
         # The file confidences contains a list
         # entries are of the form
         # (name, prediction, y|y, y|n)
         with open(fileName, 'r') as f:
             return json.load(f)
 
-    def apply_bayes(self,prior,pDy,pDn):
+    def applyBayes(self,prior,pDy,pDn):
         # Does a Bayesian model comparison
         # between the hypothesis "goes up" and the
         # hypothesis "somethig else"
@@ -39,7 +39,7 @@ class Interpreter (object):
 
         return pDy/pDn * prior
 
-    def make_prediction(self,predictions, prior):
+    def makePrediction(self,predictions, prior):
         # Returns the confidence it has in the stock going
         # up tomorrow.
         #
@@ -61,12 +61,11 @@ class Interpreter (object):
 
             # Do the actual calculation
             posterior = self.applyBayes(prior,pDy,pDn)
-
         return posterior
 
     def run(self):
-        predictions = self.get_predictions('confidences.json')
-        return self.make_prediction(predictions,1)
+        predictions = self.getPredictions('confidences.json')
+        return self.makePrediction(predictions,1)
 
 if __name__ == "__main__":
     print(Interpreter().run())
