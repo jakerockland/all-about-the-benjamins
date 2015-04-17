@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 import predictors
 import os.path
+import traceback
 
 class Updater(object):
     def __init__(self):
@@ -55,7 +56,10 @@ class Updater(object):
                 instance = predictors.SunnyTomorrow()
 	    
 	    print "#" + str(self.predictors.index(predictor)+1) + " of " + total + ": Updating " + predictor
-            self.update_predicton(instance)
-
+	    try:
+	    	self.update_predicton(instance)
+	    except:
+		print "Could not update " + predictor + ". Here is the traceback:"
+		print traceback.format_exc()
 if __name__ == "__main__":
     Updater().update_all()
