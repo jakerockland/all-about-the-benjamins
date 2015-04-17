@@ -57,12 +57,12 @@ class Integrator(object):
                     prob_yn = (num_n * prob_yn + int(todays_prediction)) / (num_n + 1)
                 num_n += 1
             log[predictor] = [int(todays_prediction),prob_yy,num_y,prob_yn,num_n]
-
+	print log[predictor]
         with open(file,'w') as f:
             json.dump(predictions,f)
 
     def integrate_all(self):
-        file = 'log.json'
+        file = 'interpreter/confidences.json'
         with open(file,'r') as f:
             log = json.load(f)
         
