@@ -55,7 +55,7 @@ class Interpreter (object):
         for prediction in predictions:
             # assign sensible names to imported values
             prior = posterior
-	    predList = preictions[prediction]
+	    predList = predictions[prediction]
             pDy = abs(predList[0]-predList[1]-1)
             pDn = abs(predList[0]-predList[3]-1)
 
