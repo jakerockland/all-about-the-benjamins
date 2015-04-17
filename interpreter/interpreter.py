@@ -16,14 +16,14 @@ class Interpreter (object):
     # interested in calculating this sort of thing on an hourly
     # or smaller instead of a daily basis.
 
-    def getPredictions(self,fileName):
+    def get_predictions(self,fileName):
         # The file confidences contains a list
         # entries are of the form
         # (name, prediction, y|y, y|n)
         with open(fileName, 'r') as f:
             return json.load(f)
 
-    def applyBayes(self,prior,pDy,pDn):
+    def apply_bayes(self,prior,pDy,pDn):
         # Does a Bayesian model comparison
         # between the hypothesis "goes up" and the
         # hypothesis "somethig else"
@@ -32,18 +32,18 @@ class Interpreter (object):
 
         # If the values are the same, we have no info
         # I am avoiding a 0/0 scenario.
-	# Furthermore, disregard any data that does not
-	# follow Cromwell's rule; that is, if pDy or pDn
-	# are zero.
+        # Furthermore, disregard any data that does not
+        # follow Cromwell's rule; that is, if pDy or pDn
+        # are zero.
         if pDn == pDy:
             return prior
         if pDn == 0:
             return prior
-	if pDy == 0:
-	    return prior
+        if pDy == 0:
+            return prior
         return pDy/pDn * prior
 
-    def makePrediction(self,predictions, prior):
+    def make_prediction(self,predictions, prior):
         # Returns the confidence it has in the stock going
         # up tomorrow.
         #
@@ -59,22 +59,22 @@ class Interpreter (object):
         for prediction in predictions:
             # assign sensible names to imported values
             prior = posterior
-	    predList = predictions[prediction]
-            print "Applying Bayes to "+prediction+" which has "+str(predList)
-	    pDy = abs(predList[0]-predList[1]-1)
-            pDn = abs(predList[0]-predList[3]-1)
-	    print "pDy="+str(pDy)
-	    print "pDn="+str(pDn)
+            predList = predictions[prediction]
+            print "Applying Bayes to " + prediction + " which has " + str(predList)
+            pDy = abs(predList[0] - predList[1] - 1)
+            pDn = abs(predList[0] - predList[3] - 1)
+            print "pDy=" + str(pDy)
+            print "pDn=" + str(pDn)
             # Do the actual calculation
-            posterior = self.applyBayes(prior,pDy,pDn)
-            print "Converging through "+str(posterior)
-	return posterior
+            posterior = self.apply_bayes(prior,pDy,pDn)
+            print "Converging through " + str(posterior)
+        return posterior
 
     def run(self):
-	print "Applying Bayes..."
-	print "[prediction,y|y,numY,y|n,numN]"
-        predictions = self.getPredictions('confidences.json')
-        return self.makePrediction(predictions,1)
+        print "Applying Bayes..."
+        print "[prediction,y|y,numY,y|n,numN]"
+        predictions = self.get_predictions('log.json')
+        return self.make_prediction(predictions,1)
 
 if __name__ == "__main__":
     print(Interpreter().run())

@@ -19,7 +19,11 @@ class Integrator(object):
                 else:
                     no_count += 1
                 predictions.remove(prediction)
-	return (yes_count / (yes_count + no_count)) > threshold
+	    try:
+	        return (yes_count / (yes_count + no_count)) > threshold
+	    except ZeroDivisionError as error:
+	        print "There is no data! Run updater first."
+	        raise
 
     def has_he_risen(self,symbol='^GSPC'):
         share = Share(symbol)
@@ -57,28 +61,28 @@ class Integrator(object):
                     prob_yn = (num_n * prob_yn + int(todays_prediction)) / (num_n + 1)
                 num_n += 1
             log[predictor] = [int(todays_prediction),prob_yy,num_y,prob_yn,num_n]
-	print log[predictor]
+            print log[predictor]
         with open(file,'w') as f:
             json.dump(predictions,f)
 
     def integrate_all(self):
-        file = 'interpreter/confidences.json'
+        file = 'log.json'
         with open(file,'r') as f:
             log = json.load(f)
-        
-	success = 0
-	total = str(len(self.predictors))
-	print "Integrating "+total+" predictors."
-        for predictor in self.predictors:
-	    print "#" + str(self.predictors.index(predictor)+1) + " of " + total + ": Integrating " + predictor
-	    try: 
-		self.integrate_predictions(predictor,log)
-		success+=1
-	    except:
-		print "There is no data for "+ predictor +"! Run updater first. Here's the traceback:"
-		print traceback.format_exc()
 
-	print "Integrated "+str(success)+" out of "+total+ " predictors."
+        success = 0
+        total = len(self.predictors)
+        print "Integrating " + str(total) + " predictors."
+        for predictor in self.predictors:
+            print "Integrating " + predictor + " (" + str(self.predictors.index(predictor) + 1) + " of " + str(total) + ")"
+            try:
+                self.integrate_predictions(predictor,log)
+                success += 1
+            except:
+                print "There is no data for "+ predictor +"! Here's the traceback:"
+                print traceback.format_exc()
+
+        print "Integrated " + str(success) + " out of " + str(total) + " predictors."
 
         with open(file,'w') as f:
             json.dump(log,f)

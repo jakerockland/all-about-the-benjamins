@@ -31,10 +31,10 @@ class Updater(object):
     def update_all(self):
         # Goes through each predictor and updates it's respective data file
         # This needs to be continually kept up to date with predictors.json
-	total = str(len(self.predictors))
-	success = 0
-	print "Updating all " + total + " predictors."
-	for predictor in self.predictors:
+        success = 0
+        total = len(self.predictors)
+        print "Updating all " + str(total) + " predictors."
+        for predictor in self.predictors:
             if predictor == "ForecastHurricane":
                 instance = predictors.ForecastHurricane()
             elif predictor == "ForecastStorm":
@@ -55,14 +55,17 @@ class Updater(object):
                 instance = predictors.SunnyToday()
             elif predictor == "SunnyTomorrow":
                 instance = predictors.SunnyTomorrow()
-	    
-	    print "#" + str(self.predictors.index(predictor)+1) + " of " + total + ": Updating " + predictor
-	    try:
-	    	self.update_predicton(instance)
-		success+=1
-	    except:
-		print "Could not update " + predictor + ". Here is the traceback:"
-		print traceback.format_exc()
-	print "Updated " + str(success) + " out of " + str(total) + " predictors successfully."
+            elif predictor == "RandomPredictor":
+                instance = predictors.RandomPredictor()
+
+            print "Updating " + predictor + " (" + str(self.predictors.index(predictor) + 1) + " of " + str(total) + ")"
+            try:
+                self.update_predicton(instance)
+                success += 1
+            except:
+                print "Could not update " + predictor + "! Here is the traceback:"
+                print traceback.format_exc()
+        print "Updated " + str(success) + " of " + str(total) + " predictors."
+
 if __name__ == "__main__":
     Updater().update_all()
