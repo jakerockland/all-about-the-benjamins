@@ -30,7 +30,9 @@ class Updater(object):
     def update_all(self):
         # Goes through each predictor and updates it's respective data file
         # This needs to be continually kept up to date with predictors.json
-        for predictor in self.predictors:
+	total = str(len(self.predictors))
+	print "Updating all " + total + " predictors."
+	for predictor in self.predictors:
             if predictor == "ForecastHurricane":
                 instance = predictors.ForecastHurricane()
             elif predictor == "ForecastStorm":
@@ -52,7 +54,7 @@ class Updater(object):
             elif predictor == "SunnyTomorrow":
                 instance = predictors.SunnyTomorrow()
 	    
-            print "Updating " + predictor
+	    print "#" + str(self.predictors.index(predictor)+1) + " of " + total + ": Updating " + predictor
             self.update_predicton(instance)
 
 if __name__ == "__main__":
