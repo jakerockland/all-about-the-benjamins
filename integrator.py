@@ -20,7 +20,7 @@ class Integrator(object):
                 predictions.remove(prediction)
 	try:
 		return (yes_count / (yes_count + no_count)) > threshold
-	except:
+	except ZeroDivisionError as error:
 		print "There is no data! Run updater first."
 		raise
 
