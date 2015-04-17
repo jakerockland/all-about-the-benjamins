@@ -51,6 +51,8 @@ class Updater(object):
                 instance = predictors.SunnyToday()
             elif predictor == "SunnyTomorrow":
                 instance = predictors.SunnyTomorrow()
+	    elif predictor == "RandomPredictor":
+		instance = predictors.RandomPredictor()
 
             self.update_predicton(instance)
 
