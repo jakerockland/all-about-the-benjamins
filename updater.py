@@ -51,7 +51,8 @@ class Updater(object):
                 instance = predictors.SunnyToday()
             elif predictor == "SunnyTomorrow":
                 instance = predictors.SunnyTomorrow()
-
+	    
+            print "Updating " + predictor
             self.update_predicton(instance)
 
 if __name__ == "__main__":
