@@ -55,8 +55,9 @@ class Interpreter (object):
         for prediction in predictions:
             # assign sensible names to imported values
             prior = posterior
-            pDy = abs(prediction[1]-prediction[2]-1)
-            pDn = abs(prediction[1]-prediction[3]-1)
+	    predList = preictions[prediction]
+            pDy = abs(predList[0]-predList[1]-1)
+            pDn = abs(predList[0]-predList[3]-1)
 
             # Do the actual calculation
             posterior = self.applyBayes(prior,pDy,pDn)
