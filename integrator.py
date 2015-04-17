@@ -18,7 +18,11 @@ class Integrator(object):
                 else:
                     no_count += 1
                 predictions.remove(prediction)
-        return True if (yes_count / (yes_count + no_count)) > threshold else False
+	try:
+		return (yes_count / (yes_count + no_count)) > threshold
+	except:
+		print "There is no data! Run updater first."
+		raise
 
     def has_he_risen(self,symbol='^GSPC'):
         share = Share(symbol)
