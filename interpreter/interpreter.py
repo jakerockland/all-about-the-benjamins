@@ -32,11 +32,15 @@ class Interpreter (object):
 
         # If the values are the same, we have no info
         # I am avoiding a 0/0 scenario.
+        # Furthermore, disregard any data that does not
+        # follow Cromwell's rule; that is, if pDy or pDn
+        # are zero.
         if pDn == pDy:
             return prior
         if pDn == 0:
-            return 1000000000
-
+            return prior
+        if pDy == 0:
+            return prior
         return pDy/pDn * prior
 
     def make_prediction(self,predictions, prior):
@@ -55,16 +59,21 @@ class Interpreter (object):
         for prediction in predictions:
             # assign sensible names to imported values
             prior = posterior
-            pDy = abs(prediction[1]-prediction[2]-1)
-            pDn = abs(prediction[1]-prediction[3]-1)
-
+            predList = predictions[prediction]
+            print "Applying Bayes to " + prediction + " which has " + str(predList)
+            pDy = abs(predList[0] - predList[1] - 1)
+            pDn = abs(predList[0] - predList[3] - 1)
+            print "pDy=" + str(pDy)
+            print "pDn=" + str(pDn)
             # Do the actual calculation
-            posterior = self.applyBayes(prior,pDy,pDn)
-
+            posterior = self.apply_bayes(prior,pDy,pDn)
+            print "Converging through " + str(posterior)
         return posterior
 
     def run(self):
-        predictions = self.get_predictions('confidences.json')
+        print "Applying Bayes..."
+        print "[prediction,y|y,numY,y|n,numN]"
+        predictions = self.get_predictions('log.json')
         return self.make_prediction(predictions,1)
 
 if __name__ == "__main__":

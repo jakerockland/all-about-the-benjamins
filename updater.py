@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 import predictors
 import os.path
+import traceback
 
 class Updater(object):
     def __init__(self):
@@ -30,6 +31,9 @@ class Updater(object):
     def update_all(self):
         # Goes through each predictor and updates it's respective data file
         # This needs to be continually kept up to date with predictors.json
+        success = 0
+        total = len(self.predictors)
+        print "Updating all " + str(total) + " predictors."
         for predictor in self.predictors:
             if predictor == "ForecastHurricane":
                 instance = predictors.ForecastHurricane()
@@ -51,10 +55,17 @@ class Updater(object):
                 instance = predictors.SunnyToday()
             elif predictor == "SunnyTomorrow":
                 instance = predictors.SunnyTomorrow()
-	    elif predictor == "RandomPredictor":
-		instance = predictors.RandomPredictor()
+            elif predictor == "RandomPredictor":
+                instance = predictors.RandomPredictor()
 
-            self.update_predicton(instance)
+            print "Updating " + predictor + " (" + str(self.predictors.index(predictor) + 1) + " of " + str(total) + ")"
+            try:
+                self.update_predicton(instance)
+                success += 1
+            except:
+                print "Could not update " + predictor + "! Here is the traceback:"
+                print traceback.format_exc()
+        print "Updated " + str(success) + " of " + str(total) + " predictors."
 
 if __name__ == "__main__":
     Updater().update_all()
