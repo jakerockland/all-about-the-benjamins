@@ -1,4 +1,5 @@
 import json
+import os.path
 
 class Interpreter (object):
     # This class is the "Bayesian Interpreter". It takes in
@@ -73,7 +74,7 @@ class Interpreter (object):
     def run(self):
         print "Applying Bayes..."
         print "[prediction,y|y,numY,y|n,numN]"
-        predictions = self.get_predictions('log.json')
+        predictions = self.get_predictions(os.path.dirname(__file__) + '/../log.json')
         return self.make_prediction(predictions,1)
 
 if __name__ == "__main__":
