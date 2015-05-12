@@ -10,7 +10,7 @@ class Updater(object):
             self.predictors = json.load(f)
 
     def update_predicton(self,instance):
-        file = 'predictions/' + instance.get_name() + '.json'
+        file = 'data/' + instance.get_name() + '.json'
         rise = instance.goes_up()
         now = datetime.strftime(datetime.utcnow(), '%Y-%m-%d %H:%M:%S')
 
