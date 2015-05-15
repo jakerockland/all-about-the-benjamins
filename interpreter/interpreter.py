@@ -36,11 +36,7 @@ class Interpreter (object):
         # Furthermore, disregard any data that does not
         # follow Cromwell's rule; that is, if pDy or pDn
         # are zero.
-        if pDn == pDy:
-            return prior
-        if pDn == 0:
-            return prior
-        if pDy == 0:
+        if pDn == pDy or pDn == 0 or pDy == 0:
             return prior
         return pDy/pDn * prior
 
@@ -56,7 +52,7 @@ class Interpreter (object):
         # number of times more probable it is that the stock
         # will go up.
         posterior = prior
-
+    
         for prediction in predictions:
             # assign sensible names to imported values
             prior = posterior
