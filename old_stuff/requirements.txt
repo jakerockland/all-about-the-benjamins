@@ -1,0 +1,10 @@
+bayespy==0.3.2
+nltk==3.0.2
+numpy==1.9.1
+praw==2.1.21
+pymc==2.3.4
+pyowm==2.2.0
+tweepy==3.2.0
+scikit-learn==0.16.0
+scipy==0.15.1
+yahoo-finance==1.1.4
