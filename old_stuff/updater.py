@@ -35,28 +35,8 @@ class Updater(object):
         total = len(self.predictors)
         print "Updating all " + str(total) + " predictors."
         for predictor in self.predictors:
-            if predictor == "ForecastHurricane":
-                instance = predictors.ForecastHurricane()
-            elif predictor == "ForecastStorm":
-                instance = predictors.ForecastStorm()
-            elif predictor == "ForecastTornado":
-                instance = predictors.ForecastTornado()
-            elif predictor == "RedditControversial":
-                instance = predictors.RedditControversial()
-            elif predictor == "RedditHot":
-                instance = predictors.RedditHot()
-            elif predictor == "RedditNew":
-                instance = predictors.RedditNew()
-            elif predictor == "RedditRising":
-                instance = predictors.RedditRising()
-            elif predictor == "RedditTop":
-                instance = predictors.RedditTop()
-            elif predictor == "SunnyToday":
-                instance = predictors.SunnyToday()
-            elif predictor == "SunnyTomorrow":
-                instance = predictors.SunnyTomorrow()
-            elif predictor == "RandomPredictor":
-                instance = predictors.RandomPredictor()
+            predictorCall = getattr(predictors, predictor)
+            instance = predictorCall()
 
             print "Updating " + predictor + " (" + str(self.predictors.index(predictor) + 1) + " of " + str(total) + ")"
             try:
