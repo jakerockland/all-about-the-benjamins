@@ -46,7 +46,7 @@ class Integrator(object):
             yesterdays_prediction = predictor_log[0]
             prob_yy = predictor_log[1] # weight, predict_up|rise
             num_y = predictor_log[2] # count, rise
-            prob_yn = predictor_log[3] # weight,predict_up|rise
+            prob_yn = predictor_log[3] # weight, predict_down|rise
             num_n = predictor_log[4] # count, fall
             if yesterday_rise:
                 if (num_y == 0):
