@@ -55,3 +55,4 @@ target/
 
 # Ignore logs
 predictions/
+log.*
