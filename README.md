@@ -1,2 +1,2 @@
 # all-about-the-benjamins
-Disregard women, acquire currency.
+Stock predictions, made better.
